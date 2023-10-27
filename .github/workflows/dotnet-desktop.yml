@@ -1,0 +1,28 @@
+name: NUnit Tests
+
+on:
+  push:
+    branches:
+      - main # Change to your project's main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.x # Change to your desired .NET Core version
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build project
+      run: dotnet build --configuration Release
+
+    - name: Run NUnit tests
+      run: dotnet test --configuration Release
